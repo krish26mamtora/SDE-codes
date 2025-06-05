@@ -4,10 +4,12 @@ using namespace std;
 
 void inputVector(vector<int> &v, int n)
 {
+    cout << "Enter vector : " << endl;
     for (int i = 0; i < n; i++)
     {
         cin >> v[i];
     }
+    cout << endl;
 }
 
 void rotateVectorClockwise(vector<int> &v, int n, int k)
@@ -27,23 +29,23 @@ void rotateVectorClockwise(vector<int> &v, int n, int k)
     }
 }
 
-void rotateVectorAntiClockwise(vector<int> &v, int n, int k)
-{
-    vector<int> temp;
-    int j = 0;
-    for (int i = 0; i < k; i++)
-    {
-        temp.push_back(v[i]);
-    }
-    for (int i = 0; i < n - k; i++)
-    {
-        v[i] = v[i + k];
-    }
-    for (int i = n - k; i < n; i++)
-    {
-        v[i] = temp[j++];
-    }
-}
+// void rotateVectorAntiClockwise(vector<int> &v, int n, int k)
+// {
+//     vector<int> temp;
+//     int j = 0;
+//     for (int i = 0; i < k; i++)
+//     {
+//         temp.push_back(v[i]);
+//     }
+//     for (int i = 0; i < n - k; i++)
+//     {
+//         v[i] = v[i + k];
+//     }
+//     for (int i = n - k; i < n; i++)
+//     {
+//         v[i] = temp[j++];
+//     }
+// }
 
 void print(vector<int> &v, int n)
 {
@@ -53,16 +55,29 @@ void print(vector<int> &v, int n)
     }
     cout << endl;
 }
-
 int main()
 {
     int z;
-    int k = 2;
+    cout << "vector size: ";
     cin >> z;
     vector<int> v(z);
+
+    int k;
+    cout << "rotation size: ";
+    cin >> k; // read number of steps to rotate
+
+    k = k % z; // handle cases where k > z
     inputVector(v, z);
-    // rotateVectorClockwise(v, z, k);
-    rotateVectorAntiClockwise(v, z, k);
+
+    if (k <= z / 2)
+    {
+        rotateVectorClockwise(v, z, z - k); // simulate anti-clockwise
+    }
+    else
+    {
+        rotateVectorClockwise(v, z, k); // rotate clockwise directly
+    }
+
     print(v, z);
     return 0;
 }
