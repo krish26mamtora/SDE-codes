@@ -9,7 +9,7 @@ int main()
         {"banana", 3},
         {"orange", 7},
         {"banana", 4},
-        {"apple", 5}, // Duplicate key; will overwrite the previous value
+        {"apple", 5},
         {"grape", 2}};
 
     for (auto &pair : m)
@@ -31,6 +31,13 @@ int main()
     for (auto [key, value] : mp)
     {
         cout << key << ": " << value << endl;
+    }
+    cout << "----------" << endl;
+
+    unordered_map<string, int>::iterator it;
+    for (it = mp.begin(); it != mp.end(); it++)
+    {
+        cout << (*it).first << " : " << (*it).second << endl;
     }
     return 0;
 }
